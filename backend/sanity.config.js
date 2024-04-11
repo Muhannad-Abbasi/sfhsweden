@@ -1,14 +1,13 @@
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemas'
-import 'dotenv/config'
+import {schemaTypes} from './schemaTypes'
 
 export default defineConfig({
   name: 'default',
   title: 'sfhsweden',
 
-  projectId: process.env.SANITY_PROJECT_ID,
+  projectId: '6m3935nv',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
