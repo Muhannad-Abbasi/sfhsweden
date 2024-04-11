@@ -11,7 +11,7 @@ const Skills = () => {
 
   useEffect(() => {
     const query = '*[_type == "experiences"]';
-    const skillsQuery = '*[_type == "skills"]';
+    const skillsQuery = '*[_type == "bidrar"]';
 
     client.fetch(query).then((data) => {
       setExperiences(data);
@@ -39,9 +39,9 @@ const Skills = () => {
                 className="app__flex"
                 style={{ backgroundColor: skill.bgColor }}
               >
-                <img src={urlFor(skill.icon)} alt={skill.name} />
+                <dev>{skill.icon}</dev>
               </div>
-              <p className="p-text">{skill.name}</p>
+              <p className="p-text">{skill.title}</p>
             </motion.div>
           ))}
         </motion.div>
