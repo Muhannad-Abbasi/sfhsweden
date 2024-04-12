@@ -41,6 +41,6 @@ const About = () => {
 
 export default AppWrap(
   MotionWrap(About, 'app__about'),
-  'about',
+  'om oss',
   'app__whitebg',
 );
