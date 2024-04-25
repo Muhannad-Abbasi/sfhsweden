@@ -5,73 +5,112 @@ import { AppWrap, MotionWrap } from '../../wrapper';
 import { client } from '../../client';
 import './Footer.scss';
 
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
 const Footer = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { username, email, message } = formData;
-
-  const handleChangeInput = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = () => {
-    setLoading(true);
-
-    const contact = {
+  const formik = useFormik({
+    initialValues: {
       _type: 'contact',
-      name: formData.username,
-      email: formData.email,
-      message: formData.message,
-    };
-
-    client.create(contact)
+      name: '',
+      email: '',
+      message: '',
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().required('Namn krävs'),
+      email: Yup.string().email('Invalid email').required('Email krävs'),
+      message: Yup.string().required('Meddelandet får inte vara tomt'),
+    }),
+    onSubmit: (values) => {
+      setLoading(true);
+      client.create(values)
       .then(() => {
         setLoading(false);
         setIsFormSubmitted(true);
       })
       .catch((err) => console.log(err));
-  };
+    },
+  });
 
   return (
     <>
-      <h2 className="head-text">Take a coffee & chat with me</h2>
+      <h2 className="head-text">Chatta Med Oss</h2>
 
       <div className="app__footer-cards">
         <div className="app__footer-card ">
           <img src={images.email} alt="email" />
-          <a href="mailto:hello@micael.com" className="p-text">hello@micael.com</a>
-        </div>
-        <div className="app__footer-card">
-          <img src={images.mobile} alt="phone" />
-          <a href="tel:+1 (123) 456-7890" className="p-text">+1 (123) 456-7890</a>
+          <a href="mailto:info@sfhsweden.se" className="p-text">info@sfhsweden.se</a>
         </div>
       </div>
+
       {!isFormSubmitted ? (
-        <div className="app__footer-form app__flex">
-          <div className="app__flex">
-            <input className="p-text" type="text" placeholder="Your Name" name="username" value={username} onChange={handleChangeInput} />
-          </div>
-          <div className="app__flex">
-            <input className="p-text" type="email" placeholder="Your Email" name="email" value={email} onChange={handleChangeInput} />
-          </div>
-          <div>
-            <textarea
+        <form 
+          onSubmit={formik.handleSubmit}
+          className='flex_center'
+        >
+          <TextField
+            fullWidth
+            id="name"
+            name="name"
+            placeholder="Ditt namn"
+            className="app__footer-form app__flex"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
+            sx={{
+              "& fieldset": { border: 'none' },
+            }}
+          />
+          <TextField
+            fullWidth
+            id="email"
+            name="email"
+            placeholder="Din email"
+            className="app__footer-form app__flex"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+            sx={{
+              "& fieldset": { border: 'none' },
+            }}
+          />
+          <TextField
+            fullWidth
+            id="message"
+            name="message"
+            placeholder="Ditt meddelande"
+            className="app__footer-form app__flex"
+            value={formik.values.message}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.message && Boolean(formik.errors.message)}
+            helperText={formik.touched.message && formik.errors.message}
+            sx={{
+              "& fieldset": { border: 'none' },
+            }}
+          />
+          <div className="">
+            <button
+              type="submit"
               className="p-text"
-              placeholder="Your Message"
-              value={message}
-              name="message"
-              onChange={handleChangeInput}
-            />
+            >
+              {!loading ? 'Skicka meddelande' : 'Skickar...'}
+            </button>
           </div>
-          <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Send Message' : 'Sending...'}</button>
-        </div>
+        </form>
       ) : (
         <div>
           <h3 className="head-text">
-            Thank you for getting in touch!
+            Tack För Att Du Hör Av Dig!
           </h3>
         </div>
       )}

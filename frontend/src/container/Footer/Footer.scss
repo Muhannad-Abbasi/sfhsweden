@@ -20,7 +20,7 @@
     min-width: 290px;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
 
     margin: 1rem 0;
@@ -34,7 +34,6 @@
     img {
       width: 40px;
       height: 40px;
-      margin: 0 0.7rem;
     }
 
     p {
@@ -43,6 +42,7 @@
     a {
       text-decoration: none;
       font-weight: 500;
+      margin-right: 10px;
     }
     &:hover {
       box-shadow: 0 0 25px #fef4f5;
@@ -65,6 +65,37 @@
 .app__footer-cards .app__footer-card:last-child:hover {
   box-shadow: 0 0 25px #f2f7fb;
 }
+
+
+.flex_center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+
+  button {
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--secondary-color);
+
+    font-weight: 500;
+    color: var(--white-color);
+    outline: none;
+    margin: 2rem 0 0 0;
+    font-family: var(--font-base);
+
+    transition: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    cursor: pointer;
+
+    &:hover {
+      background-color: #2430af;
+    }
+  }
+}
+
 
 .app__footer-form {
   width: 60%;
@@ -103,25 +134,7 @@
     }
   }
 
-  button {
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    border: none;
-    background-color: var(--secondary-color);
-
-    font-weight: 500;
-    color: var(--white-color);
-    outline: none;
-    margin: 2rem 0 0 0;
-    font-family: var(--font-base);
-
-    transition: cubic-bezier(0.55, 0.085, 0.68, 0.53);
-    cursor: pointer;
-
-    &:hover {
-      background-color: #2430af;
-    }
-  }
+  
 
   @media screen and (max-width: 768px) {
     width: 100%;
