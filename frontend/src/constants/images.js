@@ -1,5 +1,4 @@
 import email from '../assets/email.png';
-import mobile from '../assets/mobile.png';
 import hands from '../assets/hands.png';
 import peace_pigeon from '../assets/peace_pigeon.png';
 import hand from '../assets/hand.png';
@@ -11,7 +10,6 @@ import navLogo from '../assets/navLogo.png';
 
 export default {
   email,
-  mobile,
   hands,
   peace_pigeon,
   hand,
