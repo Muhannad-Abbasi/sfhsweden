@@ -8,7 +8,6 @@ import './Footer.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 
 const Footer = () => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
